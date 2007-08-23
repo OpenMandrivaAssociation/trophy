@@ -16,9 +16,8 @@ URL: http://trophy.sourceforge.net/index.php3
 License: GPL
 Group: Games/Arcade
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: clanlib0.6-devel	libclanlib-network libclanlib-sound libhermes-devel
+BuildRequires: clanlib0.8-devel	libclanlib-network libclanlib-sound libhermes-devel
 # (gc) needed because of binary incompatibility of datafiles between versions of clanlib
-Requires: clanlib0.6 = 0.6.5
 
 %description
 Trophy is a single-player racing game for Linux. Even though the goal is
