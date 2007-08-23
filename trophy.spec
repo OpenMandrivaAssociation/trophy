@@ -1,18 +1,17 @@
 %define name trophy
-%define version 1.1.3
-%define release %mkrel 8
+%define version 1.1.5
+%define release %mkrel 1
 %define Summary Trophy is a 2D car racing action game for Linux.
 
 Name: %{name}
 Summary: %{Summary}
 Version: %{version}
 Release: %{release}
-Source: http://heanet.dl.sourceforge.net/sourceforge/trophy/%{name}-%{version}-src.tar.bz2
+Source: http://heanet.dl.sourceforge.net/sourceforge/trophy/%{name}-%{version}.tar.gz
 Source1: trophy-designer-manual.tar.bz2
 Source10: %{name}.16.png
 Source11: %{name}.32.png
 Source12: %{name}.48.png
-Patch:    %{name}.gcc34.diff.bz2 
 URL: http://trophy.sourceforge.net/index.php3
 License: GPL
 Group: Games/Arcade
@@ -28,15 +27,11 @@ offers much more than just a race. Lots of extras enable "unusual" features for
 races such as shooting, putting mines and many others.
 
 %prep
-%setup -q -n %{name}-%{version}-src -a 1
-%patch
-rm -rf `find -type d -name CVS`
+%setup -q -n %{name}-%{version} -a 1
 
 %build
 # (gc) workaround g++ exception bug when -fomit-frame-pointer is set
-export CFLAGS="$RPM_OPT_FLAGS -fno-omit-frame-pointer" CXXFLAGS="$RPM_OPT_FLAGS -fno-omit-frame-pointer"
-cd trophy
-autoconf
+#export CFLAGS="$RPM_OPT_FLAGS -fno-omit-frame-pointer" CXXFLAGS="$RPM_OPT_FLAGS -fno-omit-frame-pointer"
 %configure --bindir=%{_gamesbindir} --datadir=%{_gamesdatadir}
 %make
 
@@ -54,18 +49,11 @@ chmod a+x $RPM_BUILD_ROOT/%{_gamesbindir}/trophy
 mkdir -p $RPM_BUILD_ROOT/%{_gamesdatadir}/trophy
 cp -a trophy/resources* $RPM_BUILD_ROOT/%{_gamesdatadir}/trophy
 
-mkdir -p $RPM_BUILD_ROOT/%{_menudir}
-cat << EOF > $RPM_BUILD_ROOT/%{_menudir}/%{name}
-?package(%{name}):command="%{_gamesbindir}/%{name}" icon="%{name}.png" \
-  needs="x11" section="Amusement/Arcade" title="Trophy" \
-  longtitle="%{Summary}" xdg="true"
-EOF
-
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
 Name=Trophy
-Comment=%{summary}
+Comment=Trophy is a 2D car racing action game for Linux
 Exec=%{_gamesbindir}/%{name}
 Icon=%{name}
 Terminal=false
