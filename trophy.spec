@@ -36,17 +36,8 @@ races such as shooting, putting mines and many others.
 
 %install
 rm -rf "$RPM_BUILD_ROOT"
-mkdir -p $RPM_BUILD_ROOT/%{_gamesbindir}
-cp trophy/trophy $RPM_BUILD_ROOT/%{_gamesbindir}/trophy.real
-cat > $RPM_BUILD_ROOT/%{_gamesbindir}/trophy << EOF
-#!/bin/sh
-pushd %{_gamesdatadir}/trophy
-%{_gamesbindir}/trophy.real \$*
-popd
-EOF
-chmod a+x $RPM_BUILD_ROOT/%{_gamesbindir}/trophy
-mkdir -p $RPM_BUILD_ROOT/%{_gamesdatadir}/trophy
-cp -a trophy/resources* $RPM_BUILD_ROOT/%{_gamesdatadir}/trophy
+
+%makeinstall_std
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
@@ -57,7 +48,7 @@ Exec=%{_gamesbindir}/%{name}
 Icon=%{name}
 Terminal=false
 Type=Application
-Categories=X-MandrivaLinux-MoreApplications-Games-Arcade;Game;ArcadeGame;
+Categories=Game;ArcadeGame;
 Encoding=UTF-8
 EOF
 
@@ -81,7 +72,6 @@ rm -rf "$RPM_BUILD_ROOT"
 %{_gamesbindir}/*
 %{_gamesdatadir}/trophy
 %{_datadir}/applications/mandriva-%{name}.desktop
-%{_menudir}/%{name}
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
