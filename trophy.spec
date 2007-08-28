@@ -49,7 +49,6 @@ Icon=%{name}
 Terminal=false
 Type=Application
 Categories=Game;ArcadeGame;
-Encoding=UTF-8
 EOF
 
 
