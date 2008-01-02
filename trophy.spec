@@ -15,6 +15,7 @@ Source12: %{name}.48.png
 URL: http://trophy.sourceforge.net/index.php3
 License: GPL
 Group: Games/Arcade
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: clanlib0.8-devel	libclanlib-network libclanlib-sound libhermes-devel
 # (gc) needed because of binary incompatibility of datafiles between versions of clanlib
 
