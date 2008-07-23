@@ -1,6 +1,6 @@
 %define name trophy
 %define version 1.1.5
-%define release %mkrel 1
+%define release %mkrel 3
 %define Summary Trophy is a 2D car racing action game for Linux.
 
 Name: %{name}
