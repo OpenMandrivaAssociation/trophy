@@ -1,6 +1,6 @@
 %define name trophy
 %define version 1.1.5
-%define release %mkrel 4
+%define release %mkrel 5
 %define Summary Trophy is a 2D car racing action game for Linux
 
 Name: %{name}
@@ -12,6 +12,8 @@ Source1: trophy-designer-manual.tar.bz2
 Source10: %{name}.16.png
 Source11: %{name}.32.png
 Source12: %{name}.48.png
+# patch from upstream, according to https://qa.mandriva.com/show_bug.cgi?id=49361#c8
+Patch1: trophy-1.1.5-fix_crash.diff
 URL: http://trophy.sourceforge.net/index.php3
 License: GPL
 Group: Games/Arcade
@@ -27,6 +29,7 @@ races such as shooting, putting mines and many others.
 
 %prep
 %setup -q -n %{name}-%{version} -a 1
+%patch1 -p0
 
 %build
 # (gc) workaround g++ exception bug when -fomit-frame-pointer is set
