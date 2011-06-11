@@ -1,6 +1,6 @@
 %define name trophy
-%define version 1.1.5
-%define release %mkrel 7
+%define version 1.1.6
+%define release %mkrel 1
 %define Summary A 2D car racing action game for Linux
 
 Name: %{name}
@@ -34,7 +34,7 @@ races such as shooting, putting mines and many others.
 %build
 # (gc) workaround g++ exception bug when -fomit-frame-pointer is set
 #export CFLAGS="$RPM_OPT_FLAGS -fno-omit-frame-pointer" CXXFLAGS="$RPM_OPT_FLAGS -fno-omit-frame-pointer"
-%configure --bindir=%{_gamesbindir} --datadir=%{_gamesdatadir}
+%configure2_5x --bindir=%{_gamesbindir} --datadir=%{_gamesdatadir}
 %make
 
 %install
