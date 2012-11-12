@@ -1,0 +1,13 @@
+Index: src/calineedit.cpp
+===================================================================
+--- src/calineedit.cpp
++++ src/calineedit.cpp	2009-04-13 21:48:33.000000000 +0200
+@@ -26,7 +26,7 @@
+ 
+     char *wString=new char[letters];
+     for( unsigned int i=0; i<letters-1; ++i ) wString[i] = 'W';
+-    wString[letters] = '\0';
++    wString[letters-1] = '\0';
+     resize( font->get_width( wString ), font->get_height() );
+ 
+     if( CA_APP->debug ) std::cout << "CALineEdit() end" << std::endl;
