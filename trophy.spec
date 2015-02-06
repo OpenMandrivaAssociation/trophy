@@ -1,6 +1,6 @@
 %define name trophy
 %define version 1.1.6
-%define release %mkrel 1
+%define release 2
 %define Summary A 2D car racing action game for Linux
 
 Name: %{name}
