@@ -1,20 +1,20 @@
 %define name trophy
-%define version 1.1.6
-%define release 2
+%define version 2.0.4
+%define release 1
 %define Summary A 2D car racing action game for Linux
 
 Name: %{name}
 Summary: %{Summary}
 Version: %{version}
 Release: %{release}
-Source: http://heanet.dl.sourceforge.net/sourceforge/trophy/%{name}-%{version}.tar.gz
+Source: http://downloads.sourceforge.net/trophy/%{name}-%{version}.tar.gz
 Source1: trophy-designer-manual.tar.bz2
 Source10: %{name}.16.png
 Source11: %{name}.32.png
 Source12: %{name}.48.png
 # patch from upstream, according to https://qa.mandriva.com/show_bug.cgi?id=49361#c8
-Patch1: trophy-1.1.5-fix_crash.diff
-URL: http://trophy.sourceforge.net/index.php3
+#Patch1: trophy-1.1.5-fix_crash.diff
+URL: https://trophy.sourceforge.io/
 License: GPL
 Group: Games/Arcade
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -29,18 +29,18 @@ races such as shooting, putting mines and many others.
 
 %prep
 %setup -q -n %{name}-%{version} -a 1
-%patch1 -p0
+%autopatch -p1
 
 %build
 # (gc) workaround g++ exception bug when -fomit-frame-pointer is set
 #export CFLAGS="$RPM_OPT_FLAGS -fno-omit-frame-pointer" CXXFLAGS="$RPM_OPT_FLAGS -fno-omit-frame-pointer"
-%configure2_5x --bindir=%{_gamesbindir} --datadir=%{_gamesdatadir}
-%make
+%configure --bindir=%{_gamesbindir} --datadir=%{_gamesdatadir}
+%make_build
 
 %install
 rm -rf "$RPM_BUILD_ROOT"
 
-%makeinstall_std
+%make_install
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
@@ -147,7 +147,7 @@ rm -rf "$RPM_BUILD_ROOT"
 * Tue Sep  2 2003 Guillaume Cottenceau <gc@mandrakesoft.com> 1.1.3-3mdk
 - fix deps for 64bit build
 
-* Fri Jul 25 2003 Per Øyvind Karlsen <peroyvind@sintrax.net> 1.1.3-2mdk
+* Fri Jul 25 2003 Per Ã˜yvind Karlsen <peroyvind@sintrax.net> 1.1.3-2mdk
 - rebuild
 - change summary macro to avoid possible conflicts if we were to build debug package
 - convert icons to png format
